@@ -5,6 +5,11 @@ const exphbs = require("express-handlebars");
 
 const app = express();
 
+// change url path if in production or local environment
+const production = "https://agile-tor-95344.herokuapp.com";
+const development = "http://localhost:5000";
+const url = process.env.NODE_ENV ? production : development;
+
 //handlebars middleware
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
@@ -48,10 +53,10 @@ app.post("/charge", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:5000/thanks",
-    cancel_url: "http://localhost:5000/",
+    success_url: `${url}/thanks`,
+    cancel_url: `${url}`,
   });
-
+  console.log(url);
   res.redirect(303, session.url);
 });
 
