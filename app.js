@@ -1,7 +1,6 @@
 const express = require("express");
-const stripe = require("stripe")(
-  "sk_test_51JTMrNLnwdhBHjrq2VaKUCIfMZR4p9wtDgesjdFmU0siKIvOxTojfIiFvYkGxhSDjiZO261Mmgo7FmnU5QR0jQyf002jCs7BBG"
-);
+const keys = require("./config/keys");
+const stripe = require("stripe")(keys.stripeSecretKey);
 const exphbs = require("express-handlebars");
 
 const app = express();
